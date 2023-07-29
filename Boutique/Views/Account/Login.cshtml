@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "_LoginLayout";
+}
+@model UserLoginViewModel
+
+@if (TempData["error"] != null)
+{
+    <div style="display:flex;flex-wrap:wrap" class="alert alert-@TempData["color"]" role="alert">
+        @TempData["error"]
+    </div>
+}
+
+
+<div class="d-flex flex-wrap">
+    <partial name="_ExternalAuthentication" />
+<form asp-action="Login" asp-controller="Account" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-header">
+        <h3>Giriş Yap</h3>
+        <img src="images/sign-up.png" alt="" class="sign-up-icon">
+    </div>
+    <div class="form-group">
+        <label for="">E-mail:</label>
+        <input asp-for="Email" type="text" class="form-control" data-validation="email">
+    </div>
+    <div class="form-group">
+        <label for="">Şifreniz:</label>
+        <input asp-for="Password" type="password" class="form-control" data-validation="length" data-validation-length="min8">
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+        </label>
+    </div>
+        <div class="w-100">
+    <button class="w-100">Giriş Yap</button>
+        </div>
+</form>
+
+
+<div class="w-100">
+    <a class="btn btn-dark w-100 mt-2" asp-action="Register" asp-controller="Account">
+        Kayit Ol
+    </a>
+</div>
+    <div class="w-100">
+<!-- Button trigger modal -->
+    <button type="button" class="mt-2 w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Şifremi Unuttum
+
+</button>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Şifrenizi sifirlamak için e-posta adresinizi giriniz .</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="ForgotPassword" asp-controller="Account" method="post">
+                <div class="modal-body">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex flex-wrap">
+                    <button type="submit">Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

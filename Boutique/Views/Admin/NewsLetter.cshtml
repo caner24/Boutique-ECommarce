@@ -1,0 +1,38 @@
+﻿@model NewsLetterAdminViewModel
+@{
+    Layout = "_AdminLayout";
+}
+@section Ckedit{
+    <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+}
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h2> Haber Bülteni </h2>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <form action="@Url.Action("NewsLetter", "Admin")" method="post" >
+                    <textarea name="ckeditor"></textarea>
+                    <button type="submit" class="btn btn-default">Mesaj Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        CKEDITOR.replace('ckeditor', {
+            filebrowserUploadUrl: '/Home/UploadImage',
+            filebrowserUploadMethod: 'form',
+        });
+        document.getElementById("products").classList.remove("active-menu");
+        document.getElementById("add_products").classList.remove("active-menu");
+        document.getElementById("add_newsLetter").classList.add("active-menu");
+    </script>
+
+  }

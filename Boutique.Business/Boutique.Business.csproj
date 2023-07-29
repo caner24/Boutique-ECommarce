@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boutique.Core\Boutique.Core.csproj" />
+    <ProjectReference Include="..\Boutique.DataAccess\Boutique.DataAccess.csproj" />
+    <ProjectReference Include="..\Boutique.Entities\Boutique.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

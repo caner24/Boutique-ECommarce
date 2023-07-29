@@ -1,0 +1,35 @@
+﻿@model IndexViewModel
+<section class="py-5">
+    <header>
+        <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
+        <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
+    </header>
+    <div class="row">
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="product text-center">
+                    <div class="position-relative mb-3">
+
+                        <div class="badge text-white bg-"></div><a class="d-block" asp-action="ProductDetail" asp-controller="Home" asp-route-productId="@item.Id"><img class="img-fluid w-100" src="@ImageConverter.ByteArrayToImageAsync(@item.ProductDetails.Photos[0].PhotoArr)" alt="..."></a>
+
+                        <div class="product-overlay">
+                            <ul class="mb-0 list-inline">
+                                  <form method="post" asp-controller="Home" asp-action="AddToCart">
+                                <li class="list-inline-item m-0 p-0">
+                                    <input hidden type="text" name="productId" id="productId" value="@item.Id" class="btn btn-sm btn-dark" />
+                                    <input type="submit" value="Add to Cart" class="btn btn-sm btn-dark"/>
+                                    </li>
+                                </form>
+                            </ul>
+                        </div>
+                    </div>
+                    <a hidden class="prod-name">@item.Id</a>
+                    <h6> <a class="reset-anchor" asp-action="ProductDetail" asp-controller="Home" asp-route-productId="@item.Id">@item.ProductDetails.ProductName</a></h6>
+                    <p  class="small text-muted">@item.Price₺</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

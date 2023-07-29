@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "_LoginLayout";
+}
+@model RegisterViewModel
+<div class="d-flex flex-wrap">
+    <partial name="_ExternalRegisterAuthentication" />
+<form asp-action="Register" asp-controller="Account">
+    <div asp-validation-summary="All"></div>
+    <div class="form-header">
+        <h3>Kayit Ol</h3>
+        <img src="images/sign-up.png" alt="" class="sign-up-icon">
+    </div>
+    <div class="form-group">
+        <label for="">E-mail:</label>
+        <input asp-for="Email" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Şifreniz:</label>
+        <input asp-for="Password" type="password" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Şifrenizi Onaylayin:</label>
+        <input asp-for="RePassword" type="password" class="form-control">
+    </div>
+    <div class="w-100">
+
+   
+    <button class="w-100">Kayit Ol</button>
+    </div>
+</form>
+<div class="w-100">
+    <a class="btn btn-dark w-100 mt-2" asp-action="Login" asp-controller="Account">
+      Giriş Yap
+    </a>
+</div>
+</div>

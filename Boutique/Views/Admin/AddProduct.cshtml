@@ -1,0 +1,128 @@
+﻿@model AdminProductViewModel
+@{
+    Layout = "_AdminLayout";
+}
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Ürün Ekleme</h2>
+                <h5>Buradan yeni bir ürün ekleyebilirsiniz. </h5>
+
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Form Element Examples
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Basic Form Examples</h3>
+                                <form method="post" asp-action="AddProduct" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label>Ürün Adı</label>
+                                        <input asp-for="Product.ProductDetails.ProductName" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Product.ProductDetails.ProductName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group ">
+                                        <label>Ürün Rengi</label>
+                                        <input asp-for="Product.ProductDetails.Color" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Product.ProductDetails.Color, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group ">
+                                        <label>Ürün Aciklamasi</label>
+                                        <input asp-for="Product.ProductDetails.ProductDetailText" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Product.ProductDetails.ProductDetailText, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ürün Miktarı</label>
+                                        <input asp-for="Product.ProductDetails.Amount" type="number" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Product.ProductDetails.Amount, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ürün Fiyatı</label>
+                                        <input asp-for="Product.Price" type="number" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Resim Seç</label>
+                                    </div>
+                                    <div class="col-md-12 row">
+                                        <input name="formFiles" multiple class="col-md-3" type="file" accept="image/*" onchange="showImage(event)" />
+                                    </div>
+
+                                    <div class="col-md-12 row">
+                                        <img class="col-md-3" id="preview-0" style="width: 25%;" src="" />
+                                        <img class="col-md-3" id="preview-1" style="width: 25%;" src="" />
+                                        <img class="col-md-3" id="preview-2" style="width: 25%;" src="" />
+                                        <img class="col-md-3" id="preview-3" style="width: 25%;" src="" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Kategorileri</label>
+                                        <div class="col-md-12 row">
+
+                                                @foreach (var item in Model.Categories)
+                                                {
+                                                  <label> <input type="checkbox" name="categories[]" value="@item.Id"/>@item.CategoryName</label>
+                                                }
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-default">Ürünü Kaydet</button>
+                                    <button type="reset" class="btn btn-primary">Formu Temizle</button>
+                                </form>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        document.getElementById("products").classList.remove("active-menu");
+        document.getElementById("add_newsLetter").classList.remove("active-menu");
+        document.getElementById("add_products").classList.add("active-menu");
+        function showImage(event) {
+            var input = event.target;
+            if (input.files && input.files.length > 0) {
+                for (var x = 0; x < input.files.length; x++) {
+                    showImagePreview(input.files[x], x);
+                }
+            }
+        }
+
+        function showImagePreview(file, index) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var imageElement = document.getElementById(`preview-${index}`);
+                imageElement.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        var deleteButtons = document.getElementsByClassName("delete");
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener('click', function (e) {
+                console.log("sa");
+                var parentDiv = this.parentNode;
+                var imageElement = parentDiv.querySelector("img");
+                imageElement.src = "";
+            });
+        }
+
+    </script>
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.metisMenu.js"></script>
+}

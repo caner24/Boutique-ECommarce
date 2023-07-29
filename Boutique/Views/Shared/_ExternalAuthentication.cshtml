@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+
+        @{
+            var providers = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (!providers.Any())
+            {
+                <div>
+                    <p>
+                       Herhangi bir giriş yapilacak servis bulunamadi !.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <div class="socials">
+                            <p>Sign up with social platforms</p>                             
+                            @foreach (var provider in providers)
+                            {
+                           
+                            <button type="submit" value="@provider.Name" name="provider"><i class="fa-brands fa-google"></i></button>
+                            }
+                    </div>
+                </form>
+            }
+        }

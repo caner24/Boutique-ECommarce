@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Product>
+
+    @foreach (var item in Model)
+{
+    <div class="col-lg-3 col-sm-6">
+    <div class="product text-center skel-loader">
+        <div class="d-block mb-3 position-relative">
+                <a class="d-block" asp-action="ProductDetail" asp-controller="Home" asp-route-productId="@item.Id"><img class="img-fluid w-100" src="@ImageConverter.ByteArrayToImageAsync(item.ProductDetails.Photos[0].PhotoArr)" alt="..."></a>
+            <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a></li>
+                    <li class="list-inline-item m-0 p-0"><form method="post" asp-controller="Home" asp-action="AddCartItem"> <input name="productId" id="productId" type="text" hidden value="@item.Id"> <input type="submit" value="Add to Cart" class="btn btn-sm btn-dark" /></form></li>
+                    <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                </ul>
+            </div>
+        </div>
+            <h6> <a class="reset-anchor" asp-action="ProductDetail" asp-controller="Home" asp-route-productId="@item.Id">@item.ProductDetails.ProductName</a></h6>
+            <p class="small text-muted">@item.Price₺</p>
+    </div>
+</div>
+}
+

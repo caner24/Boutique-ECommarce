@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Category>
+
+
+<ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
+    @foreach (var item in Model)
+    {
+        <li class="mb-2"><a class="reset-anchor" asp-action="Products" asp-controller="Home" asp-route-categories="@item.CategoryName" >@item.CategoryName</a></li>
+    }
+
+</ul>
